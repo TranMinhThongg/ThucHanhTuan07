@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Stop Watch</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src='main.js'></script>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Stop Watch</h1>
+    <div class="main">
+        <div>
+            <p style="font-size: 45px;">
+                <span id="sec">00</span>
+                <span>:</span>
+                <span id="mili">00</span>
+            </p>
+        </div>
+        <div>
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+
+            var sec = 00;
+            var mili = 00;
+            var appendTens = document.getElementById("mili")
+            var appendSeconds = document.getElementById("sec")
+            var buttonStart = document.getElementById('start');
+            var buttonStop = document.getElementById('stop');
+            var buttonReset = document.getElementById('reset');
+            var Interval;
+
+            buttonStart.onclick = function() {
+
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            }
+
+            buttonStop.onclick = function() {
+                clearInterval(Interval);
+            }
+
+
+            buttonReset.onclick = function() {
+                clearInterval(Interval);
+                mili = "00";
+                sec = "00";
+                appendTens.innerHTML = mili;
+                appendSeconds.innerHTML = sec;
+            }
+
+            function startTimer() {
+                mili++;
+
+                if (mili <= 9) {
+                    appendTens.innerHTML = "0" + mili;
+                }
+
+                if (mili > 9) {
+                    appendTens.innerHTML = mili;
+
+                }
+
+                if (mili > 99) {
+                    console.log("sec");
+                    sec++;
+                    appendSeconds.innerHTML = "0" + sec;
+                    mili = 0;
+                    appendTens.innerHTML = "0" + 0;
+                }
+
+                if (sec > 9) {
+                    appendSeconds.innerHTML = sec;
+                }
+
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>
